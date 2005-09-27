@@ -2,6 +2,8 @@ package HTML::Tag::TEXTAREA;
 
 use base 'HTML::Tag';
 
+$HTML::Tag::TEXTAREA::VERSION = '0.02';
+
 use Class::Builder (
 	'-methods' 	=> { constructor => 'create' },
 	has_end_tag => { boolean => 1 }, 

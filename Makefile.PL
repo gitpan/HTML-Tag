@@ -6,6 +6,8 @@ WriteMakefile(
 		NAME	  			=> "HTML::Tag",
 	  VERSION_FROM 	=> "Tag.pm",
 	 	PREREQ_PM     => {
+	 	                   'Class::Builder' => 0,
+	 	                   'Tie::IxHash'    => 0,
                      },
 	      ($] >= 5.005 ?
 	       (

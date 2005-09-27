@@ -2,6 +2,8 @@ package HTML::Tag::YEAR;
 
 use base 'HTML::Tag::SELECT';
 
+$HTML::Tag::YEAR::VERSION = '0.02';
+
 use Class::Builder (
 	'-methods' 	=> { constructor => 'create' },
 	has_end_tag => { boolean => 1 }, 
@@ -20,12 +22,12 @@ use Class::Builder (
 sub inner {
 	my $self 	= shift;
 	my $ret		= '';
-	$ret			.= qq|<OPTION value=""></OPTION>\n| if ($self->maybenull);
+	$ret			.= qq|<option value=""></option>\n| if ($self->maybenull);
 	my $year 	= (localtime())[5]+1900;
 	foreach ($self->from..$self->to) {
 		$_ = sprintf('%04d',$_);
-		$ret		.= qq|<OPTION value="$_"| . ($self->selected eq $_ ? ' selected' : '') .
-								qq|>$_</OPTION>\n|;
+		$ret		.= qq|<option value="$_"| . ($self->selected eq $_ ? ' selected' : '') .
+								qq|>$_</option>\n|;
 	}
 	return $ret;
 }

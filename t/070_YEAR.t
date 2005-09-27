@@ -17,14 +17,14 @@ use Tie::IxHash;
 
 ok(defined $obj);
 
-ok($obj->html,qr/<OPTION\svalue="$year"\sselected>$year<\/OPTION>/);
+ok($obj->html,qr/<option\svalue="$year"\sselected>$year<\/option>/);
 
 $year++;
 
 $obj->selected($year);
 
-ok($obj->html,qr/<OPTION\svalue="$year"\sselected>$year<\/OPTION>/);
+ok($obj->html,qr/<option\svalue="$year"\sselected>$year<\/option>/);
 
 $obj->maybenull(1);
 
-ok($obj->html,qr/^<SELECT\sname="test"><OPTION\svalue=""><\/OPTION>/);
+ok($obj->html,qr/^<select\sname="test"><option\svalue=""><\/option>/);

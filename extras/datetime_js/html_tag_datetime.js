@@ -4,20 +4,73 @@ var MonthDays = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 var MonthNames = new Array('Gennaio','Febbraio','Marzo','Aprile','Maggio',
 'Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre');
 
+var ver4 = (document.layers || document.all) ? 1 : 0;
+var justKeyPressed;
 
-
+function getEl (s_id) {
+	return (document.all ? document.all[s_id] : (document.getElementById ? document.getElementById(s_id) : null));
+}
+       
+function datetime_keydown(DnEvents) {
+	if (justKeyPressed) return ;
+	justKeyPressed = 1;
+	var uevent = (ver4) ? window.event : DnEvents;
+	k = (ver4) ?  window.event.keyCode : DnEvents.which ;
+	eventType = (ver4) ? event.type : DnEvents.type;
+	visibleElement = (ver4) ?  window.event.srcElement : DnEvents.currentTarget ;
+	var visibleId = visibleElement.id.slice(2,-4);
+	var visibleType = visibleElement.id.substring(visibleId.length+3);
+	var visibleDateItem = visibleElement.id.substr(0,1);
+	//alert (visibleId + " " + visibleType + " " + visibleDateItem  );
+	//getEl('debug').innerHTML = "visibleElement: " + visibleElement.id + " - eventType: " + eventType + " - validate: "+datetime_validate(visibleElement,visibleDateItem)+ " - keypressed: " + k + "<br>" + getEl('debug').innerHTML;
+	if (k==9 && !datetime_validate(visibleElement,visibleDateItem)) {
+		//visibleElement.focus();
+		if (ver4) {
+				 uevent.cancelBubble = true;
+   			 uevent.returnValue = false;
+		} else {
+				// non funziona in firefox
+				uevent.preventDefault();
+   			uevent.stopPropagation(); 
+		}
+		justKeyPressed = 0;
+		return false;
+	}
+	var hiddenType = (visibleType == 'txt') ? 'sel' : 'txt';
+	var hiddenElement = getEl(visibleDateItem  + "_" + visibleId + '_' + hiddenType );
+	if (k == 27  || (((k>47 && k<58) ||(k>95 && k<106)) && visibleType == 'sel') || ((k == 9 || k == 0) && visibleType == 'txt') ) {
+		if (visibleElement.value.toString().length == 1) visibleElement.value = '0' + visibleElement.value.toString();
+		visibleElement.style.display='none';
+		if (hiddenElement) {
+			hiddenElement.value=visibleElement.value;
+			hiddenElement.style.display='';
+			hiddenElement.focus();
+			if (hiddenElement.type == 'text') {
+				if (ver4) {
+					if (k == 27) hiddenElement.select();
+				} else {
+					hiddenElement.select();
+				}
+			}
+			if (hiddenElement.type == 'text' && ver4 && k>47 && k<58) hiddenElement.value = k-48; 
+			if (hiddenElement.type == 'text' && ver4 && k>95 && k<106) hiddenElement.value = k-96;			
+		}
+	}
+	syncHidden(visibleId);
+	justKeyPressed = 0;
+}
 
 function syncHidden(txtHiddenElementName) {
-  	var hfield = document.getElementById(txtHiddenElementName)
-  	var giorno_obj 	= document.getElementById(txtHiddenElementName + "_giorno");
-    var mese_obj 		= document.getElementById(txtHiddenElementName + "_mese");
-    var anno_obj 		= document.getElementById(txtHiddenElementName + "_anno");
+  	var hfield = getEl(txtHiddenElementName);
+  	var giorno_obj 	= getEl("d_" + txtHiddenElementName + "_sel");
+    var mese_obj 		= getEl("m_" + txtHiddenElementName + "_sel");
+    var anno_obj 		= getEl("y_" + txtHiddenElementName + "_sel");
 
   	hfield.value= anno_obj.value + '-' + mese_obj.value + '-' + giorno_obj.value;
   }
   
   function syncVisible(txtHiddenElementName) {
-  	var hfield  = document.getElementById(txtHiddenElementName)
+  	var hfield  = getEl(txtHiddenElementName)
   	var dta		= hfield.value.split('-');
   	if (dta.length == 3) {
 			var time  = dta[2].split(' ');
@@ -31,9 +84,9 @@ function syncHidden(txtHiddenElementName) {
   }
   
   function setDateVisibleElement(txtHiddenElementName,giorno,mese,anno) {
-  	var giorno_obj 	= document.getElementById(txtHiddenElementName + "_giorno");
-    var mese_obj 		= document.getElementById(txtHiddenElementName + "_mese");
-    var anno_obj 		= document.getElementById(txtHiddenElementName + "_anno");
+  	var giorno_obj 	= getEl("d_" + txtHiddenElementName + "_sel");
+    var mese_obj 		= getEl("m_" + txtHiddenElementName + "_sel");
+    var anno_obj 		= getEl("y_" + txtHiddenElementName + "_sel");
     if (giorno_obj) giorno_obj.value=giorno;
     if (mese_obj) mese_obj.value=mese;     
     if (anno_obj) anno_obj.value=anno;
@@ -69,7 +122,7 @@ function closeHandler(cal) {
 // It takes care of catching "mousedown" signals on document and hiding the
 // calendar if the click was outside.
 function showCalendar(button,id, format, showsTime, showsOtherMonths) {
-  var el = document.getElementById(id);
+  var el = getEl(id);
   if (_dynarch_popupCalendar != null) {
     // we already have some calendar created
     _dynarch_popupCalendar.hide();                 // so we hide it first.
@@ -125,4 +178,27 @@ function html_months(checked_value) {
     	writeln('<OPTION VALUE="'+ key + '"' + checked + '>' + val + '</OPTION>');
     }
   }
+}
+
+function html_years(checked_value) {
+  var checked ='';
+  var cyear = (new Date()).getFullYear();
+  with (document) {
+    writeln('<OPTION VALUE=""' + checked + '></OPTION>');
+    for (var num=cyear-100;num<cyear+100;num++) { 
+    	var key = (num.toString().length == 1) ? '0' + num :  num;
+    	var val = key;
+    	checked = (checked_value == val || checked_value == num) ? ' checked' : '';
+    	writeln('<OPTION VALUE="'+ key + '"' + checked + '>' + val + '</OPTION>');
+    }
+  }
+}
+
+function datetime_validate(el,dateTimeType) {
+	var isValid = true;
+	switch(dateTimeType)
+        {
+        case 'd':   isValid = validate_day(el); break       
+        }
+  return isValid;
 }

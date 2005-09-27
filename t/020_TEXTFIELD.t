@@ -16,12 +16,12 @@ my $obj = HTML::Tag->new(element=>'TEXTFIELD');
 
 ok(defined $obj);
 
-ok($obj->html,'<INPUT type="text" />');
+ok($obj->html,'<input type="text" />');
 
 $obj->name('test');
 
-ok($obj->html,'<INPUT type="text" name="test" />');
+ok($obj->html,'<input type="text" name="test" />');
 
 $obj->value('tv');
 
-ok($obj->html,'<INPUT type="text" name="test" value="tv" />');
+ok($obj->html,'<input type="text" name="test" value="tv" />');

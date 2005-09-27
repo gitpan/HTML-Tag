@@ -16,18 +16,18 @@ use Tie::IxHash;
 
 ok(defined $obj);
 
-ok($obj->html,'<SELECT name="test"></SELECT>');
+ok($obj->html,'<select name="test"></select>');
 
 tie my %values, 'Tie::IxHash', 'k1' => 'v1','k2' => 'v2', 'k3' => 'v3';
 
 $obj->value(\%values);
 
-ok($obj->html,qr/^<SELECT\sname="test"><OPTION\svalue="k1">v1<\/OPTION>/);
+ok($obj->html,qr/^<select\sname="test"><option\svalue="k1">v1<\/option>/);
 
 $obj->selected('k2');
 
-ok($obj->html,qr/<OPTION\svalue="k2"\sselected>v2<\/OPTION>/);
+ok($obj->html,qr/<option\svalue="k2"\sselected>v2<\/option>/);
 
 $obj->maybenull(1);
 
-ok($obj->html,qr/^<SELECT\sname="test"><OPTION\svalue=""><\/OPTION>/);
+ok($obj->html,qr/^<select\sname="test"><option\svalue=""><\/option>/);

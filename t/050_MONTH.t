@@ -16,12 +16,12 @@ use Tie::IxHash;
 
 ok(defined $obj);
 
-ok($obj->html,qr/<OPTION\svalue="05">05\s-\sMaggio<\/OPTION>/);
+ok($obj->html,qr/<option\svalue="05">05\s-\sMaggio<\/option>/);
 
 $obj->selected('05');
 
-ok($obj->html,qr/<OPTION\svalue="05"\sselected>05\s-\sMaggio<\/OPTION>/);
+ok($obj->html,qr/<option\svalue="05"\sselected>05\s-\sMaggio<\/option>/);
 
 $obj->maybenull(1);
 
-ok($obj->html,qr/^<SELECT\sname="test"><OPTION\svalue=""><\/OPTION>/);
+ok($obj->html,qr/^<select\sname="test"><option\svalue=""><\/option>/);

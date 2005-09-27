@@ -1,7 +1,6 @@
 package HTML::Tag;
 
-$__PACKAGE__::VERSION      = "0.01";
-$HTML::Tag::VERSION = '0.01';
+$HTML::Tag::VERSION = '0.02';
 
 sub new {
 	my $class 		= shift;
@@ -9,7 +8,7 @@ sub new {
 	my $element   = $opt{element} || 'SPAN';
 	
 	require 'HTML/Tag/' . $element . '.pm';
-	my $self  = eval 'HTML::Tag::' . $element . '->create(@_)';
+	my $self  = "HTML::Tag::$element"->create(@_);
 	die "Unable to create HTML::Tag::$element object" unless ($self);
 	return $self;
 }
@@ -22,11 +21,11 @@ sub html {
 sub _build_start_tag {
 	my $self		= shift;
 	my $ret			= '';
-	$ret				.= "<" . $self->tag;
+	$ret				.= "<" . lc($self->tag);
 	foreach (@{$self->attributes}) {
 		my @attr_value = $self->get($_); 
 		my $attr_value = $attr_value[0];
-		if ($attr_value ne '') {
+		if ("$attr_value" ne '') {
 			$ret .= " " . $self->_build_attribute($_,$attr_value);
 		}
 	}
@@ -37,7 +36,7 @@ sub _build_start_tag {
 sub _build_end_tag {
 	my $self		= shift;
 	return '' unless $self->has_end_tag;
-	return "</" . $self->tag . ">";
+	return "</" . lc($self->tag) . ">";
 }
 
 sub _build_attribute {

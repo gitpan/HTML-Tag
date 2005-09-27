@@ -14,12 +14,12 @@ my $obj = HTML::Tag->new(element=>'TEXTAREA');
 
 ok(defined $obj);
 
-ok($obj->html,'<TEXTAREA cols="22" rows="3"></TEXTAREA>');
+ok($obj->html,'<textarea cols="22" rows="3"></textarea>');
 
 $obj->name('test');
 
-ok($obj->html,'<TEXTAREA name="test" cols="22" rows="3"></TEXTAREA>');
+ok($obj->html,'<textarea name="test" cols="22" rows="3"></textarea>');
 
 $obj->value('tv');
 
-ok($obj->html,'<TEXTAREA name="test" cols="22" rows="3">tv</TEXTAREA>');
+ok($obj->html,'<textarea name="test" cols="22" rows="3">tv</textarea>');

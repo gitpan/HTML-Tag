@@ -1,5 +1,6 @@
 extras/datetime_js/html_tag_datetime.js
 extras/datetime_js/html_tag_datetime_loader.js
+extras/datetime_js/validator.js
 extras/datetime_js/jscalendar/calendar-blue.css
 extras/datetime_js/jscalendar/calendar-blue2.css
 extras/datetime_js/jscalendar/calendar-brown.css
@@ -95,4 +96,5 @@ Tag/SPAN.pm
 Tag/TEXTAREA.pm
 Tag/TEXTFIELD.pm
 Tag/YEAR.pm
+Changes
 META.yml                                 Module meta-data (added by MakeMaker)

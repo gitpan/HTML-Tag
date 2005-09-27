@@ -1,0 +1,11 @@
+00.02 (2005/09/27)
+- In DATE.pm you can now combo and textbox to input date. If you press a digit key in the combo, it will be converted in a textbox form field.
+- Converted HTML tags in lowercase.
+- Changed tests to lowercase tags
+- Added validation for day/month/year fields
+- Added prerequisites for Class::Builder and Tie::IxHash.
+- Add Changes file
+- Remove a bug in DATE.pm that opens the calendar instead of submit form if you press the "enter" key in whatever form field.
+
+00.01 (2005-09-12)
+- First public release

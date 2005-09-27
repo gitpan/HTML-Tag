@@ -14,12 +14,12 @@ my $obj = HTML::Tag->new(element=>'HIDDEN');
 
 ok(defined $obj);
 
-ok($obj->html,'<INPUT type="hidden" />');
+ok($obj->html,'<input type="hidden" />');
 
 $obj->name('test');
 
-ok($obj->html,'<INPUT type="hidden" name="test" />');
+ok($obj->html,'<input type="hidden" name="test" />');
 
 $obj->value('tv');
 
-ok($obj->html,'<INPUT type="hidden" name="test" value="tv" />');
+ok($obj->html,'<input type="hidden" name="test" value="tv" />');

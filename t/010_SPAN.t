@@ -14,12 +14,12 @@ my $obj = HTML::Tag->new();
 
 ok(defined $obj);
 
-ok($obj->html,'<SPAN></SPAN>');
+ok($obj->html,'<span></span>');
 
 $obj->name('test');
 
-ok($obj->html,'<SPAN name="test"></SPAN>');
+ok($obj->html,'<span name="test"></span>');
 
 $obj->value('tv');
 
-ok($obj->html,'<SPAN name="test" value="tv"></SPAN>');
+ok($obj->html,'<span name="test" value="tv"></span>');

@@ -2,6 +2,8 @@ package HTML::Tag::SELECT;
 
 use base 'HTML::Tag';
 
+$HTML::Tag::SELECT::VERSION = '0.02';
+
 use Class::Builder (
 	'-methods' 	=> { constructor => 'create' },
 	has_end_tag => { boolean => 1 }, 
@@ -19,10 +21,10 @@ use Class::Builder (
 sub inner {
 	my $self 	= shift;
 	my $ret		= '';
-	$ret			.= qq|<OPTION value=""></OPTION>\n| if ($self->maybenull);
+	$ret			.= qq|<option value=""></option>\n| if ($self->maybenull);
 	while (my ($k,$v) = each %{$self->value}) {
-		$ret		.= qq|<OPTION value="$k"| . ($self->selected eq $k ? ' selected' : '') .
-								qq|>$v</OPTION>\n|;
+		$ret		.= qq|<option value="$k"| . ($self->selected eq $k ? ' selected' : '') .
+								qq|>$v</option>\n|;
 	}
 	return $ret;
 }

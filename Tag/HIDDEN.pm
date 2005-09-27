@@ -1,5 +1,7 @@
 package HTML::Tag::HIDDEN;
 
+$HTML::Tag::HIDDEN::VERSION = '0.02';
+
 use base 'HTML::Tag';
 
 use Class::Builder (
