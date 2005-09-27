@@ -1,8 +1,11 @@
 package HTML::Tag::MONTH;
 
+use strict;
+use warnings;
+
 use base 'HTML::Tag::SELECT';
 
-$HTML::Tag::MONTH::VERSION = '0.02';
+$HTML::Tag::MONTH::VERSION = '0.03';
 
 use Class::Builder (
 	'-methods' 	=> { constructor => 'create' },

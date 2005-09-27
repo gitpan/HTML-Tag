@@ -1,6 +1,9 @@
 package HTML::Tag::HIDDEN;
 
-$HTML::Tag::HIDDEN::VERSION = '0.02';
+use strict;
+use warnings;
+
+$HTML::Tag::HIDDEN::VERSION = '0.03';
 
 use base 'HTML::Tag';
 

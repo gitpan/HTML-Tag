@@ -1,8 +1,11 @@
 package HTML::Tag::DATE;
 
+use strict;
+use warnings;
+
 use base 'HTML::Tag';
 
-$HTML::Tag::DATE::VERSION      = "0.02";
+$HTML::Tag::DATE::VERSION      = "0.03";
 
 $HTML::Tag::DATE::js					 = '';
 

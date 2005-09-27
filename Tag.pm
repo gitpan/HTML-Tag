@@ -1,6 +1,9 @@
 package HTML::Tag;
 
-$HTML::Tag::VERSION = '0.02';
+use strict;
+use warnings;
+
+$HTML::Tag::VERSION = '0.03';
 
 sub new {
 	my $class 		= shift;

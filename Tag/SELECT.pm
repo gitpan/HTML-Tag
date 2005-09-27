@@ -1,8 +1,11 @@
 package HTML::Tag::SELECT;
 
+use strict;
+use warnings;
+
 use base 'HTML::Tag';
 
-$HTML::Tag::SELECT::VERSION = '0.02';
+$HTML::Tag::SELECT::VERSION = '0.03';
 
 use Class::Builder (
 	'-methods' 	=> { constructor => 'create' },

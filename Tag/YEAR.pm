@@ -1,8 +1,11 @@
 package HTML::Tag::YEAR;
 
+use strict;
+use warnings;
+
 use base 'HTML::Tag::SELECT';
 
-$HTML::Tag::YEAR::VERSION = '0.02';
+$HTML::Tag::YEAR::VERSION = '0.03';
 
 use Class::Builder (
 	'-methods' 	=> { constructor => 'create' },

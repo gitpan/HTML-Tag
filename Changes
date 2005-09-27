@@ -1,3 +1,6 @@
+00.03 (2005/09/27)
+- Added strict and warnings directive to all modules.
+
 00.02 (2005/09/27)
 - In DATE.pm you can now combo and textbox to input date. If you press a digit key in the combo, it will be converted in a textbox form field.
 - Converted HTML tags in lowercase.
