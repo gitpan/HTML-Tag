@@ -3,7 +3,7 @@ package HTML::Tag;
 use strict;
 use warnings;
 
-$HTML::Tag::VERSION = '0.03';
+$HTML::Tag::VERSION = '0.04';
 
 sub new {
 	my $class 		= shift;

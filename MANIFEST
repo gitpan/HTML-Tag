@@ -1,6 +1,6 @@
+Changes
 extras/datetime_js/html_tag_datetime.js
 extras/datetime_js/html_tag_datetime_loader.js
-extras/datetime_js/validator.js
 extras/datetime_js/jscalendar/calendar-blue.css
 extras/datetime_js/jscalendar/calendar-blue2.css
 extras/datetime_js/jscalendar/calendar-brown.css
@@ -74,8 +74,10 @@ extras/datetime_js/jscalendar/skins/aqua/Thumbs.db
 extras/datetime_js/jscalendar/skins/aqua/title-bg.gif
 extras/datetime_js/jscalendar/skins/aqua/today-bg.gif
 extras/datetime_js/jscalendar/test.php
+extras/datetime_js/validator.js
 Makefile.PL
 MANIFEST			This list of files
+META.yml			Module meta-data (added by MakeMaker)
 t/010_SPAN.t
 t/01_Tag.t
 t/020_TEXTFIELD.t
@@ -85,10 +87,17 @@ t/050_MONTH.t
 t/060_TEXTAREA.t
 t/070_YEAR.t
 t/080_DATE.t
+t/090_Lang_by_default.t
+t/091_Lang_by_use.t
+t/100_BOOLSELECT.t
 Tag.pm
 Tag.pod
+Tag/BOOLSELECT.pm
 Tag/DATE.pm
 Tag/HIDDEN.pm
+Tag/Lang.pm
+Tag/Lang/en.pm
+Tag/Lang/it.pm
 Tag/MONTH.pm
 Tag/PASSWORD.pm
 Tag/SELECT.pm
@@ -96,5 +105,3 @@ Tag/SPAN.pm
 Tag/TEXTAREA.pm
 Tag/TEXTFIELD.pm
 Tag/YEAR.pm
-Changes
-META.yml                                 Module meta-data (added by MakeMaker)
