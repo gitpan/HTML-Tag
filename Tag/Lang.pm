@@ -3,11 +3,11 @@ use strict;
 use warnings;
 
 
-our $VERSION 	= 0.01;
+our $VERSION 	= '1.00';
 
 use base qw(Exporter);
-our (@EXPORT_OK, %bool_descr);
-@EXPORT_OK = qw(%bool_descr);
+our (@EXPORT_OK, %bool_descr,@month);
+@EXPORT_OK = qw(%bool_descr @month);
 
 our $language	= '';
 
@@ -36,9 +36,14 @@ sub language {
 	my $pkg = __PACKAGE__ . '::' . &language;
 	eval "require $pkg";
 	if ($@) {
-		die "Error from requiring $pkg: $@";
+		# try to switch to english language
+		$pkg = __PACKAGE__ . '::en';
+		eval "require $pkg";
+		if ($@) {
+			die "Error from requiring $pkg: $@";
+		}
 	}
-	eval "import $pkg qw(\%bool_descr)";
+	eval "import $pkg qw(\%bool_descr \@month)";
   if ($@) {
     die "Error importing from $pkg: $@";
   }

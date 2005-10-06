@@ -3,22 +3,21 @@ package HTML::Tag::HIDDEN;
 use strict;
 use warnings;
 
-$HTML::Tag::HIDDEN::VERSION = '0.03';
+our $VERSION = '1.00';
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag);
 
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 0 }, 
-	element			=> { string => 'HIDDEN'},
-	tag 				=> { string => 'INPUT'},
-	type 				=> { string => 'hidden'},
-	name 				=> { string => ''},
-	value				=> { string => ''},
-	attributes 	=> { arrayref => ['type','name','value'] },
- 
-);
-
+BEGIN {
+	our $class_def	= {
+							element			=> 'HIDDEN',
+							tag 				=> 'INPUT',
+							type 				=> 'hidden',
+							has_end_tag	=> 0,
+							value				=> '',
+							attributes 	=> ['type','value'],
+ 	}
+}
 
 1;
 

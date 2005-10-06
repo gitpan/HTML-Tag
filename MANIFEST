@@ -79,7 +79,6 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml			Module meta-data (added by MakeMaker)
 t/010_SPAN.t
-t/01_Tag.t
 t/020_TEXTFIELD.t
 t/030_SELECT.t
 t/040_HIDDEN.t
@@ -90,6 +89,8 @@ t/080_DATE.t
 t/090_Lang_by_default.t
 t/091_Lang_by_use.t
 t/100_BOOLSELECT.t
+t/110_PASSWORD.t
+t/120_Multiple_element.t
 Tag.pm
 Tag.pod
 Tag/BOOLSELECT.pm
@@ -105,3 +106,4 @@ Tag/SPAN.pm
 Tag/TEXTAREA.pm
 Tag/TEXTFIELD.pm
 Tag/YEAR.pm
+

@@ -3,23 +3,21 @@ package HTML::Tag::TEXTFIELD;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag);
 
-$HTML::Tag::TEXTFIELD::VERSION = '0.03';
+our $VERSION = '1.00';
 
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 0 }, 
-	element			=> { string => 'TEXTFIELD'},
-	tag 				=> { string => 'INPUT'},
-	type 				=> { string => 'text'},
-	name 				=> { string => ''},
-	value				=> { string => ''},
-	tabindex		=> { number => ''},
-	attributes 	=> { arrayref => ['type','name','value','tabindex'] },
- 
-);
-
+BEGIN {
+	our $class_def	= {
+				element			=> 'TEXTFIELD',
+				tag 				=> 'INPUT',
+				has_end_tag => 0, 
+				type 				=> 'text',
+				value				=> '',
+				attributes 	=> ['type','value'] ,
+	};
+}
 
 1;
 

@@ -10,18 +10,18 @@ BEGIN { plan tests => 4 }
 use HTML::Tag;
 
 # Helpful notes.  All note-lines must start with a "#".
-print "# I'm testing HTML::Tag::TEXTFIELD\n";
+print "# I'm testing HTML::Tag::PASSWORD\n";
 
-my $obj = HTML::Tag->new(element=>'TEXTFIELD',name => '');
+my $obj = HTML::Tag->new(element=>'PASSWORD');
 
 ok(defined $obj);
 
-ok($obj->html,'<input type="text" />');
+ok($obj->html,'<input type="password" />');
 
 $obj->name('test');
 
-ok($obj->html,'<input name="test" type="text" />');
+ok($obj->html,'<input name="test" type="password" />');
 
 $obj->value('tv');
 
-ok($obj->html,'<input name="test" type="text" value="tv" />');
+ok($obj->html,'<input name="test" type="password" value="tv" />');

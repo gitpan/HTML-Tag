@@ -3,21 +3,21 @@ package HTML::Tag::PASSWORD;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag);
 
-$HTML::Tag::PASSWORD::VERSION = '0.03';
+our $VERSION = '1.00';
 
-use Class::Builder (	
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 0 }, 
-	element			=> { string => 'PASSWORD'},
-	tag 				=> { string => 'INPUT'},
-	type 				=> { string => 'password'},
-	name 				=> { string => ''},
-	value				=> { string => ''},
-	tabindex		=> { number => ''},
-	attributes 	=> { arrayref => ['type','name','value','tabindex'] },
-);
+BEGIN {
+	our $class_def	= {
+							element			=> 'PASSWORD',
+							tag 				=> 'INPUT',
+							has_end_tag => 0, 
+							type 				=> 'password',
+							value				=> '',
+							attributes 	=> ['type','value'],
+	}
+}
 
 
 1;

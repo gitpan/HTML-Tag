@@ -3,23 +3,21 @@ package HTML::Tag::SELECT;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag);
 
-$HTML::Tag::SELECT::VERSION = '0.03';
+our $VERSION = '1.00';
 
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 1 }, 
-	element			=> { string => 'SELECT'},
-	tag 				=> { string => 'SELECT'},
-	name 				=> { string => ''},
-	value				=> { hashref => {}},
-	tabindex		=> { number => ''},
-	selected		=> { string => ''},
-	maybenull		=> { boolean => 0},
-	attributes 	=> { arrayref => ['name','tabindex'] },
- 
-);
+BEGIN {
+	our $class_def	= {
+							element			=> 'SELECT',
+							tag 				=> 'SELECT',
+							has_end_tag	=> 1,
+							value				=> {},
+							selected		=> '',
+							maybenull		=> 0,
+	}
+}
 
 sub inner {
 	my $self 	= shift;

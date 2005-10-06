@@ -3,26 +3,24 @@ package HTML::Tag::BOOLSELECT;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag::SELECT);
 
 use HTML::Tag::Lang qw(%bool_descr);
 
-our $VERSION = '0.01';
+our $VERSION = '1.00';
 
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 1 }, 
-	element			=> { string => 'BOOLSELECT'},
-	tag 				=> { string => 'SELECT'},
-	name 				=> { string => ''},
-	tabindex		=> { number => ''},
-	selected		=> { string => ''},
-	value				=> { string => ''},
-	maybenull		=> { boolean => 0},
-	attributes 	=> { arrayref => ['name','tabindex'] },
-	nobeforeyes => { boolean => 0},
+BEGIN {
+	our $class_def	= {
+							element			=> 'BOOLSELECT',
+							tag 				=> 'SELECT',
+							selected		=> '',
+							value				=> '',
+							maybenull		=> 0,
+							nobeforeyes => 0,
+	}
+}
  
-);
 
 sub inner {
 	my $self 	= shift;

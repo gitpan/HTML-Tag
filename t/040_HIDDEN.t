@@ -18,8 +18,8 @@ ok($obj->html,'<input type="hidden" />');
 
 $obj->name('test');
 
-ok($obj->html,'<input type="hidden" name="test" />');
+ok($obj->html,'<input name="test" type="hidden" />');
 
 $obj->value('tv');
 
-ok($obj->html,'<input type="hidden" name="test" value="tv" />');
+ok($obj->html,'<input name="test" type="hidden" value="tv" />');

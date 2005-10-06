@@ -3,16 +3,44 @@ package HTML::Tag;
 use strict;
 use warnings;
 
-$HTML::Tag::VERSION = '0.04';
+use Tie::IxHash;
+use Class::AutoAccess;
+use base qw(Class::AutoAccess);
+
+
+our $VERSION = '1.00';
+
+BEGIN {
+	our $class_def	= {
+							element			=> 'SPAN',
+							name				=> '',
+							has_end_tag	=> 1,
+							tabindex		=> '',
+							attributes	=> ['name','tabindex'],
+	};
+}
 
 sub new {
 	my $class 		= shift;
-	my %opt				= @_;
-	my $element   = $opt{element} || 'SPAN';
-	
-	require 'HTML/Tag/' . $element . '.pm';
-	my $self  = "HTML::Tag::$element"->create(@_);
-	die "Unable to create HTML::Tag::$element object" unless ($self);
+	my %values		= @_;
+	my $self;
+	if ($class eq __PACKAGE__) {
+		# call the true class
+		my $element   = $values{element} || 'SPAN';
+		require 'HTML/Tag/' . $element . '.pm';
+		$self  = "HTML::Tag::$element"->new(%values);
+		die "Unable to create HTML::Tag::$element object" unless ($self);
+	} else {
+		no strict "refs";
+		$self				= {};
+		my $opt_child		= ${$class . "::class_def"};
+		my $opt_parent	= ${__PACKAGE__ . "::class_def"};
+		__PACKAGE__->merge_attributes($opt_child,$opt_parent);
+		__PACKAGE__->push_hashref($self,$opt_parent);
+		__PACKAGE__->push_hashref($self,$opt_child);
+		__PACKAGE__->push_hashref($self,\%values);
+		bless $self,$class;
+	}
 	return $self;
 }
 
@@ -26,7 +54,7 @@ sub _build_start_tag {
 	my $ret			= '';
 	$ret				.= "<" . lc($self->tag);
 	foreach (@{$self->attributes}) {
-		my @attr_value = $self->get($_); 
+		my @attr_value = $self->$_; 
 		my $attr_value = $attr_value[0];
 		if ("$attr_value" ne '') {
 			$ret .= " " . $self->_build_attribute($_,$attr_value);
@@ -53,6 +81,24 @@ sub inner {
 	return '';
 }
 
+sub push_hashref {
+	my $self	= shift;
+  my $dst = shift;
+  my $src = shift;
+  @$dst{keys %$src} = values %$src;
+}
+
+sub merge_attributes {
+	# union of two arrayref
+	my $self		= shift;
+	my $dst			= shift;
+	my $src			= shift;
+	$src->{attributes} ||= [] ;
+	$dst->{attributes} ||= [] ;
+	tie my %union, 'Tie::IxHash';
+	$union{$_} = 1 for (@{$src->{attributes}},@{$dst->{attributes}});
+	@{$dst->{attributes}}		= keys %union;
+}
 
 
 1;

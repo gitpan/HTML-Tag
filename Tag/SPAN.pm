@@ -3,22 +3,18 @@ package HTML::Tag::SPAN;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag);
 
-$HTML::Tag::SPAN::VERSION = '0.03';
+our $VERSION = '1.00';
 
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 1 }, 
-	element			=> { string => 'SPAN'},
-	tag 				=> { string => 'SPAN'},
-	name 				=> { string => ''},
-	value				=> { string => ''},
-	inner				=> { string => ''},
-	attributes 	=> { arrayref => ['name','value'] },
- 
-);
-
+BEGIN {
+  our $class_def = {
+							element			=> 'SPAN',
+							tag 				=> 'SPAN',
+							has_end_tag => 1,
+	}
+}
 
 1;
 

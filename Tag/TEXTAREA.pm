@@ -3,23 +3,20 @@ package HTML::Tag::TEXTAREA;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use base qw(Class::AutoAccess HTML::Tag);
 
-$HTML::Tag::TEXTAREA::VERSION = '0.03';
+our $VERSION = '1.00';
 
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 1 }, 
-	element			=> { string => 'TEXTAREA'},
-	tag 				=> { string => 'TEXTAREA'},
-	name 				=> { string => ''},
-	value				=> { string => ''},
-	tabindex		=> { number => ''},
-	cols				=> { number => 22 },
-	rows				=> { number => 3 },
-	attributes 	=> { arrayref => ['name','cols','rows','tabindex'] },
- 
-);
+BEGIN {
+	our $class_def	= {
+							element			=> 'TEXTAREA',
+							tag 				=> 'TEXTAREA',
+							value				=> '',
+							cols				=> 40,
+							rows				=> 5,
+							attributes	=> ['cols','rows'],
+    }
+	}
 
 sub inner {
 	return $_[0]->value;

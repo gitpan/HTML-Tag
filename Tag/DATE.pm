@@ -3,25 +3,19 @@ package HTML::Tag::DATE;
 use strict;
 use warnings;
 
-use base 'HTML::Tag';
+use Class::AutoAccess;
+use base qw(Class::AutoAccess HTML::Tag);
 
-$HTML::Tag::DATE::VERSION      = "0.03";
+our $VERSION = '1.00';
 
-$HTML::Tag::DATE::js					 = '';
-
-
-use Class::Builder (
-	'-methods' 	=> { constructor => 'create' },
-	has_end_tag => { boolean => 1 }, 
-	element			=> { string => 'DATE'},
-	tag 				=> { string => 'SELECT'},
-	name 				=> { string => ''},
-	tabindex		=> { number => ''},
-	value				=> { string => ''},
-	js					=> { string => 'html_tag_datetime_loader.js'},
-	attributes 	=> { arrayref => ['name','tabindex'] },
- 
-);
+BEGIN {
+	our $class_def	= {
+							element			=> 'DATE',
+							tag 				=> 'SELECT',
+							js					=> 'html_tag_datetime_loader.js',
+							value				=> '',
+	}
+}
 
 sub html {
 	my $self		= shift;

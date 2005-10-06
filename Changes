@@ -1,3 +1,15 @@
+01.00 (2005/10/06)
+- Removed Class::Builder request. 
+- Added Class::AutoAccess request.
+- Now HTML::Tag::* works in a better Object Oriented way.
+- Added some other tests.
+- If it's found a language that haven't a module available in namespace HTML::Tag::Lang::*, English (en) is now used instead of raise an error. 
+
+00.05 (2005/10/02)
+- MONTH widget now use HTML::Tag::Lang for localized months name.
+- Add a "permitted" method to MONTH.pm that show only months in the permitted arrayref and exclude all others.
+- Add a "permitted" method to YEAR.pm that show only years in the permitted arrayref and exclude all others.
+
 00.04 (2005/10/01)
 - Add modules to support different language in HTML and javascript generated text.
 - Add BOOLSELECT, a module to generate a YES/NO combobox.
