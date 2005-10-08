@@ -7,7 +7,7 @@ use Class::AutoAccess;
 use Tie::IxHash;
 use base qw(Class::AutoAccess HTML::Tag::SELECT);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 BEGIN {
 	our $class_def	= {
@@ -18,6 +18,7 @@ BEGIN {
 							selected		=> (localtime())[5] + 1900,
 							maybenull		=> 0,
 							permitted 	=> undef,
+							value				=> '',
 	}
 }
 

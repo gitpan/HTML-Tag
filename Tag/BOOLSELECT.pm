@@ -15,7 +15,6 @@ BEGIN {
 							element			=> 'BOOLSELECT',
 							tag 				=> 'SELECT',
 							selected		=> '',
-							value				=> '',
 							maybenull		=> 0,
 							nobeforeyes => 0,
 	}

@@ -6,7 +6,7 @@ use warnings;
 use Class::AutoAccess;
 use base qw(Class::AutoAccess HTML::Tag);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 BEGIN {
 	our $class_def	= {
@@ -23,9 +23,11 @@ sub inner {
 	my $self 	= shift;
 	my $ret		= '';
 	$ret			.= qq|<option value=""></option>\n| if ($self->maybenull);
-	while (my ($k,$v) = each %{$self->value}) {
-		$ret		.= qq|<option value="$k"| . ($self->selected eq $k ? ' selected' : '') .
-								qq|>$v</option>\n|;
+	if (ref($self->value) eq 'HASH') {
+		while (my ($k,$v) = each %{$self->value}) {
+			$ret		.= qq|<option value="$k"| . ($self->selected eq $k ? ' selected' : '') .
+									qq|>$v</option>\n|;
+		}
 	}
 	return $ret;
 }

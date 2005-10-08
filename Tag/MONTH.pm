@@ -27,7 +27,13 @@ sub inner {
 	my $self 	= shift;
 	my $ret		= '';
 	$ret			.= qq|<option value=""></option>\n| if ($self->maybenull);
-	my @permitted = $self->permitted ? @{$self->permitted} : (1..12);
+	my @permitted;
+	if ($self->permitted) {
+		# to be sure that permitted are real numbers
+		push @permitted,$_+0 for (@{$self->permitted});
+	} else {
+		@permitted = (1..12);
+	}
 	my @cmonth = localtime();
 	my $cmonth = $cmonth[4]+1;
 	my @mlist	 = ($cmonth..12);

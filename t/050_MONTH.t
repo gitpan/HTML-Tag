@@ -3,7 +3,7 @@ use Test;
 use Tie::IxHash;
 
 # use a BEGIN block so we print our plan before MyModule is loaded
-BEGIN { plan tests => 5 }
+BEGIN { plan tests => 6 }
 
 # load your module...
 use HTML::Tag;
@@ -28,3 +28,6 @@ ok($obj->html,qr/^<select\sname="test"><option\svalue=""><\/option>/);
 
 $obj->permitted([1,5,8]);
 ok($obj->html !~ /<option\svalue="02">/);
+
+$obj->permitted(['09']);
+ok($obj->html, qr/<option\svalue="09">/);

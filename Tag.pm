@@ -8,7 +8,7 @@ use Class::AutoAccess;
 use base qw(Class::AutoAccess);
 
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 BEGIN {
 	our $class_def	= {
@@ -16,7 +16,19 @@ BEGIN {
 							name				=> '',
 							has_end_tag	=> 1,
 							tabindex		=> '',
-							attributes	=> ['name','tabindex'],
+							onafterupdate	=> '', onblur	=> '', onchange	=> '', onclick	=> '',
+							ondblclick	=> '', onerrorupdate	=> '', onfilterchange	=> '',
+							onfocus	=> '', onhelp	=> '', onkeydown	=> '', onkeypress	=> '',
+							onkeyup	=> '', onmousedown	=> '', onmousemove	=> '', 
+							onmouseout	=> '', onmouseover	=> '', onmouseup	=> '', 
+							onresize	=> '',
+							style => '', class => '',
+							attributes	=> ['name','tabindex','onafterupdate', 'onblur',
+								'onchange', 'onclick', 'ondblclick', 'onerrorupdate',
+								'onfilterchange', 'onfocus', 'onhelp', 'onkeydown', 
+								'onkeypress', 'onkeyup', 'onmousedown', 'onmousemove',
+								'onmouseout', 'onmouseover', 'onmouseup', 'onresize',
+								'style','class'],
 	};
 }
 
