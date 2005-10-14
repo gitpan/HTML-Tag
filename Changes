@@ -1,4 +1,7 @@
-01.01 (2005/10/??)
+01.02 (2005/10/12)
+- Add size and maxlength attribute to TEXTFIELD.
+
+01.01 (2005/10/08)
 - Add javascript, style and class attribute to all modules.
 - In SELECT.pm module, we use value attribute only if it's a hashref element (option_key => option_value for every options).
 - Removed a bug in MONTH.pm that cannot hide unpermitted months if the array of permitted months have written in string form with a zero before number with one digit.

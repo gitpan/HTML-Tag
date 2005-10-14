@@ -6,7 +6,7 @@ use warnings;
 use Class::AutoAccess;
 use base qw(Class::AutoAccess HTML::Tag);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 BEGIN {
 	our $class_def	= {
@@ -15,7 +15,9 @@ BEGIN {
 				has_end_tag => 0, 
 				type 				=> 'text',
 				value				=> '',
-				attributes 	=> ['type','value'] ,
+				size				=> '',
+				maxlength 	=> '',
+				attributes 	=> ['type','value','size','maxlength'] ,
 	};
 }
 

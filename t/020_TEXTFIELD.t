@@ -4,7 +4,7 @@ use warnings;
 use diagnostics;
 
 # use a BEGIN block so we print our plan before MyModule is loaded
-BEGIN { plan tests => 4 }
+BEGIN { plan tests => 6 }
 
 # load your module...
 use HTML::Tag;
@@ -25,3 +25,11 @@ ok($obj->html,'<input name="test" type="text" />');
 $obj->value('tv');
 
 ok($obj->html,'<input name="test" type="text" value="tv" />');
+
+$obj->size(6);
+
+ok($obj->html,'<input name="test" type="text" value="tv" size="6" />');
+
+$obj->maxlength(6);
+
+ok($obj->html,'<input name="test" type="text" value="tv" size="6" maxlength="6" />');
