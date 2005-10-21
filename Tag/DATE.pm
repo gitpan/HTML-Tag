@@ -6,7 +6,7 @@ use warnings;
 use Class::AutoAccess;
 use base qw(Class::AutoAccess HTML::Tag);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 BEGIN {
 	our $class_def	= {
@@ -26,6 +26,7 @@ sub html {
 	pop @js_path_split;
 	my $js_path = join('/',@js_path_split);
 	$js_path = $js_path . '/' if (length($js_path) > 0);
+	my $rid			= &_random_id;
 	my $ret		=<<EOF;
 	<!-- Propagate javascript path -->
   <script language="javascript">
@@ -34,27 +35,34 @@ sub html {
   <!-- Load the javascript functions if necessary -->
   <script type="text/javascript" src="$js"></script>
   <!-- the day field -->
-  <select size="1" id="d_${name}_sel" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)">
+  <select size="1" id="d_${name}_${rid}_sel" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)">
   <script language="javascript">html_days()</script>
   </select>
-  <input type="text" id="d_${name}_txt" size="2" maxlength="2" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)" style="display: none" />
+  <input type="text" id="d_${name}_${rid}_txt" size="2" maxlength="2" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)" style="display: none" />
   <!-- the month field -->
-  <select size="1" id="m_${name}_sel" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)">
+  <select size="1" id="m_${name}_${rid}_sel" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)">
   <script language="javascript">html_months()</script>
   </select>
-  <input type="text" id="m_${name}_txt"  size="2" maxlength="2" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)" style="display: none" />
+  <input type="text" id="m_${name}_${rid}_txt"  size="2" maxlength="2" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)" style="display: none" />
   <!-- the year field -->
-  <select size="1" id="y_${name}_sel" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)">
+  <select size="1" id="y_${name}_${rid}_sel" onblur="datetime_keydown(event)" onkeydown="datetime_keydown(event)">
   <script language="javascript">html_years()</script>
   </select>
-  <input type="text"  id="y_${name}_txt" size="4" value="" maxlength="4" onkeydown="datetime_keydown(event)" onblur="datetime_keydown(event)" style="display: none" />
+  <input type="text"  id="y_${name}_${rid}_txt" size="4" value="" maxlength="4" onkeydown="datetime_keydown(event)" onblur="datetime_keydown(event)" style="display: none" />
   <!-- the real hidden field -->
-  <input type="hidden" id="${name}" name="${name}" value="$value" />
+  <input type="hidden" id="${name}_${rid}" name="${name}" value="$value" />
   <!-- the onload sync between hidden and visible field -->
-  <script language="javascript">syncVisible('${name}')</script>
+  <script language="javascript">syncVisible('${name}_${rid}')</script>
   <!-- the show calendar button -->
-  <button id="trigger" type="button" onclick="return showCalendar(this,'${name}', '&#37;Y-&#37;m-&#37;d', false, true);">...</button>
+  <button id="trigger" type="button" onclick="return showCalendar(this,'${name}_${rid}', '&#37;Y-&#37;m-&#37;d', false, true);">...</button>
 EOF
+	return $ret;
+}
+
+sub _random_id {
+	# this generate a random string for id attribute
+	my $ret;
+	$ret =int(rand(10000));
 	return $ret;
 }
 

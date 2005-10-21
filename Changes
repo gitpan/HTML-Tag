@@ -1,3 +1,6 @@
+01.03 (2005/10/21)
+- If there was more DATE widgets with same name in an HTML page, there was some javascript errors owing to a not unique HTML id attribute in DATE control items.
+
 01.02 (2005/10/12)
 - Add size and maxlength attribute to TEXTFIELD.
 

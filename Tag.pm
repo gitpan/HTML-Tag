@@ -8,7 +8,7 @@ use Class::AutoAccess;
 use base qw(Class::AutoAccess);
 
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 BEGIN {
 	our $class_def	= {

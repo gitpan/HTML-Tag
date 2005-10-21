@@ -103,7 +103,7 @@ function selected(cal, date) {
       m=m+1;
       if (m.toString().length == 1) m = '0' + m;
       if (d.toString().length == 1) d = '0' + d;
-      setDateVisibleElement(_dynarch_popupCalendar.sel.name,d,m,y);
+      setDateVisibleElement(_dynarch_popupCalendar.sel.id,d,m,y);
       cal.callCloseHandler();
   }
 }
