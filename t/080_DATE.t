@@ -2,7 +2,7 @@ use strict;
 use Test;
 
 # use a BEGIN block so we print our plan before MyModule is loaded
-BEGIN { plan tests => 5 }
+BEGIN { plan tests => 6 }
 
 # load your module...
 use HTML::Tag;
@@ -10,7 +10,6 @@ use HTML::Tag;
 # Helpful notes.  All note-lines must start with a "#".
 print "# I'm testing HTML::Tag::DATE\n";
 
-my $year = (localtime())[5]+1900;
 my $obj = HTML::Tag->new(element=>'DATE', name=>'test');
 
 ok(defined $obj);
@@ -25,4 +24,13 @@ ok($obj->html,qr/<input type=\"hidden\" id=\"another_test_\d+\" name=\"another_t
 
 $obj = HTML::Tag->new(element=>'DATE', name=>'ya_test', value=>"77868");
 ok($obj->html,qr/<input type=\"hidden\" id=\"ya_test_\d+\" name=\"ya_test\" value=\"77868\" \/>/);
+
+$obj = HTML::Tag->new(element=>'DATE', name=>'ya_test', value=>"now");
+my ($day,$month,$year) = (localtime())[3..5];
+$year += 1900;
+$month++;
+$month  = "0$month" if length($month) == 1;
+$day    = "0$day" if length($day) == 1;
+my $value  = "$year-$month-$day";
+ok($obj->html,qr/<input type=\"hidden\" id=\"ya_test_\d+\" name=\"ya_test\" value=\"$value\" \/>/);
 

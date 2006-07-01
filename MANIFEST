@@ -78,7 +78,6 @@ extras/datetime_js/jscalendar/test.php
 extras/datetime_js/validator.js
 Makefile.PL
 MANIFEST			This list of files
-META.yml			Module meta-data (added by MakeMaker)
 t/010_SPAN.t
 t/020_TEXTFIELD.t
 t/030_SELECT.t
@@ -108,3 +107,4 @@ Tag/TEXTAREA.pm
 Tag/TEXTFIELD.pm
 Tag/YEAR.pm
 
+META.yml                                 Module meta-data (added by MakeMaker)
