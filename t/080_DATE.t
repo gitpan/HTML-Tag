@@ -14,16 +14,18 @@ my $obj = HTML::Tag->new(element=>'DATE', name=>'test');
 
 ok(defined $obj);
 
+print $obj->html;
+
 ok($obj->html,qr/<script language=\"javascript\">\n\tvar html_tag_datetime_js_path = '';/ 
-					&& qr/onclick=\"return showCalendar\(this/);
+					&& qr/<input type=\"text\" htmltag=\"date\" name=\"test\" value=\"\" \/>/);
 $obj = HTML::Tag->new(element=>'DATE', name=>'value_test', value=>"1969-07-21");
-ok($obj->html,qr/<input type=\"hidden\" id=\"value_test_\d+\" name=\"value_test\" value=\"1969-07-21\" \/>/);
+ok($obj->html,qr/<input type=\"text\" htmltag=\"date\" name=\"value_test\" value=\"1969-07-21\" \/>/);
 
 $obj = HTML::Tag->new(element=>'DATE', name=>'another_test', value=>"");
-ok($obj->html,qr/<input type=\"hidden\" id=\"another_test_\d+\" name=\"another_test\" value=\"\" \/>/);
+ok($obj->html,qr/name=\"another_test\" value=\"\" \/>/);
 
 $obj = HTML::Tag->new(element=>'DATE', name=>'ya_test', value=>"77868");
-ok($obj->html,qr/<input type=\"hidden\" id=\"ya_test_\d+\" name=\"ya_test\" value=\"77868\" \/>/);
+ok($obj->html,qr/name=\"ya_test\" value=\"77868\" \/>/);
 
 $obj = HTML::Tag->new(element=>'DATE', name=>'ya_test', value=>"now");
 my ($day,$month,$year) = (localtime())[3..5];
@@ -32,5 +34,5 @@ $month++;
 $month  = "0$month" if length($month) == 1;
 $day    = "0$day" if length($day) == 1;
 my $value  = "$year-$month-$day";
-ok($obj->html,qr/<input type=\"hidden\" id=\"ya_test_\d+\" name=\"ya_test\" value=\"$value\" \/>/);
+ok($obj->html,qr/name=\"ya_test\" value=\"$value\" \/>/);
 

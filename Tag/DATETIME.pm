@@ -1,4 +1,4 @@
-package HTML::Tag::DATE;
+package HTML::Tag::DATETIME;
 
 use strict;
 use warnings;
@@ -10,7 +10,7 @@ our $VERSION = '1.02';
 
 BEGIN {
 	our $class_def	= {
-							element			=> 'DATE',
+							element			=> 'DATETIME',
 							tag 				=> 'SELECT',
 							js					=> 'html_tag_datetime_loader.js',
 							value				=> '',
@@ -23,11 +23,11 @@ sub html {
 	my $value		= $self->value;
 
 	$value 			= &_normalize_value($value);
-	my $js			= $HTML::Tag::DATE::js || $self->js;
+	my $js			= $HTML::Tag::DATETIME::js || $self->js;
 	my $ret		=<<"";
   <!-- Load the javascript functions if necessary -->
   <script type="text/javascript" src="$js"></script>
-	<input type="text" htmltag="date" name="$name" value="$value" />
+	<input type="text" htmltag="datetime" name="$name" value="$value" />
 
 	return $ret;
 }
@@ -35,12 +35,14 @@ sub html {
 sub _normalize_value {
 	my $value = shift;
 	if ($value eq 'now') {
-		my ($day,$month,$year) = (localtime())[3..5];
+		my ($min,$hour,$day,$month,$year) = (localtime())[1..5];
 		$year += 1900;
 		$month++; 
+		$min 	= "0$min" if length($min) == 1;
+		$hour 	= "0$hour" if length($hour) == 1;
 		$month 	= "0$month" if length($month) == 1;
 		$day 		= "0$day" if length($day) == 1;
-		$value 	= "$year-$month-$day";
+		$value 	= "$year-$month-$day $hour:$min";
 	}
 	return $value;
 }

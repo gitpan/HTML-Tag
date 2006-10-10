@@ -1,4 +1,4 @@
-package HTML::Tag::DATE;
+package HTML::Tag::TIME;
 
 use strict;
 use warnings;
@@ -6,11 +6,11 @@ use warnings;
 use Class::AutoAccess;
 use base qw(Class::AutoAccess HTML::Tag);
 
-our $VERSION = '1.02';
+our $VERSION = '1.06';
 
 BEGIN {
 	our $class_def	= {
-							element			=> 'DATE',
+							element			=> 'TIME',
 							tag 				=> 'SELECT',
 							js					=> 'html_tag_datetime_loader.js',
 							value				=> '',
@@ -23,11 +23,11 @@ sub html {
 	my $value		= $self->value;
 
 	$value 			= &_normalize_value($value);
-	my $js			= $HTML::Tag::DATE::js || $self->js;
+	my $js			= $HTML::Tag::TIME::js || $self->js;
 	my $ret		=<<"";
   <!-- Load the javascript functions if necessary -->
   <script type="text/javascript" src="$js"></script>
-	<input type="text" htmltag="date" name="$name" value="$value" />
+	<input type="text" htmltag="time" name="$name" value="$value" />
 
 	return $ret;
 }
@@ -35,12 +35,10 @@ sub html {
 sub _normalize_value {
 	my $value = shift;
 	if ($value eq 'now') {
-		my ($day,$month,$year) = (localtime())[3..5];
-		$year += 1900;
-		$month++; 
-		$month 	= "0$month" if length($month) == 1;
-		$day 		= "0$day" if length($day) == 1;
-		$value 	= "$year-$month-$day";
+		my ($min,$hour) = (localtime())[1..2];
+		$min 	= "0$min" if length($min) == 1;
+		$hour 		= "0$hour" if length($hour) == 1;
+		$value 	= "$hour:$min";
 	}
 	return $value;
 }
