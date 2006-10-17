@@ -42,7 +42,7 @@ sub _normalize_value {
 		$hour 	= "0$hour" if length($hour) == 1;
 		$month 	= "0$month" if length($month) == 1;
 		$day 		= "0$day" if length($day) == 1;
-		$value 	= "$year-$month-$day $hour:$min";
+		$value 	= "$year-$month-$day $hour:$min:00";
 	}
 	return $value;
 }

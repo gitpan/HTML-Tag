@@ -1,3 +1,7 @@
+01.07 (2006/10/17)
+- Some problem in some variables that sometimes are string and sometime HTMLElement make setToday not to work. Solved
+- If you set "now" as value, visible hour and minutes fields are wrong because in the hidden value seconds has missed.
+
 01.06 (2006/10/10)
 - The DATE Javascript has been completely rewrote.
 - DATE.pm has been changes (and now is more simple) owing to above change.

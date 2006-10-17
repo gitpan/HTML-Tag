@@ -35,6 +35,6 @@ $month  = "0$month" if length($month) == 1;
 $day    = "0$day" if length($day) == 1;
 $min    = "0$min" if length($min) == 1;
 $hour    = "0$hour" if length($hour) == 1;
-my $value  = "$year-$month-$day $hour:$min";
+my $value  = "$year-$month-$day $hour:$min:00";
 ok($obj->html,qr/name=\"ya_test\" value=\"$value\" \/>/);
 

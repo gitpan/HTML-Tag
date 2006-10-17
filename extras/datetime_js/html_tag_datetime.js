@@ -181,7 +181,6 @@ function datetime_keydown(DnEvents) {
 	eventType = (ver4) ? event.type : DnEvents.type;
 	visibleElement = (ver4) ?  window.event.srcElement : DnEvents.currentTarget ;
 	hiddenElement = $(visibleElement.id.slice(2));
-
 	// special keys
 	// Ins
 	if (k == 45) {
@@ -271,10 +270,10 @@ function syncHidden(hiddenElement) {
 function setToday(hiddenElement) {
 	var today = new Date;
 	setHidden(hiddenElement,true,today.getFullYear(),today.getMonth()+1,
-		today.getDate());
+		today.getDate(),today.getHours(),today.getMinutes());
 }
 
-function setHidden(hiddenElement,syncVisible,year,month,day,hour,min) {
+function setHidden(hiddenElement,syncV,year,month,day,hour,min) {
 	var value;
 	if (month && (month.toString().length == 1)) month = '0' + month.toString();
 	if (day && (day.toString().length == 1)) day = '0' + day.toString();
@@ -287,9 +286,8 @@ function setHidden(hiddenElement,syncVisible,year,month,day,hour,min) {
 	if (hour) {
 		value += hour +':'+min + ':00';
 	}
-
 	$(hiddenElement).value = value;
-	if (syncVisible) syncVisible(hiddenElement);
+	if (syncV) syncVisible(hiddenElement);
 }
 
   function syncVisible(txtHiddenElementName) {
@@ -317,11 +315,11 @@ function setHidden(hiddenElement,syncVisible,year,month,day,hour,min) {
   }
   
   function setDateVisibleElement(txtHiddenElementName,giorno,mese,anno,hour,min) {
-  	var giorno_obj 	= $("2_" + txtHiddenElementName);
-    var mese_obj 		= $("1_" + txtHiddenElementName);
-    var anno_obj 		= $("0_" + txtHiddenElementName);
-		var ohour				= $('3_' + txtHiddenElementName);
-		var omin				= $('4_' + txtHiddenElementName);
+  	var giorno_obj 	= $("2_" + $(txtHiddenElementName).id);
+    var mese_obj 		= $("1_" + $(txtHiddenElementName).id);
+    var anno_obj 		= $("0_" + $(txtHiddenElementName).id);
+		var ohour				= $('3_' + $(txtHiddenElementName).id);
+		var omin				= $('4_' + $(txtHiddenElementName).id);
     if (giorno_obj) giorno_obj.value=giorno;
     if (mese_obj) mese_obj.value=mese;     
     if (anno_obj) anno_obj.value=anno;
