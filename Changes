@@ -1,3 +1,6 @@
+01.07 (2007/06/24)
+- Add RADIO Tag.
+
 01.07 (2006/10/17)
 - Some problem in some variables that sometimes are string and sometime HTMLElement make setToday not to work. Solved
 - If you set "now" as value, visible hour and minutes fields are wrong because in the hidden value seconds has missed.

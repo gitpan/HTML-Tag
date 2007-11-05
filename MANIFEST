@@ -92,6 +92,7 @@ t/110_PASSWORD.t
 t/120_Multiple_element.t
 t/130_TIME.t
 t/140_DATETIME.t
+t/150_RADIO.t
 Tag.pm
 Tag.pod
 Tag/BOOLSELECT.pm
@@ -109,5 +110,5 @@ Tag/SPAN.pm
 Tag/TEXTAREA.pm
 Tag/TEXTFIELD.pm
 Tag/YEAR.pm
-
+Tag/RADIO.pm
 META.yml                                 Module meta-data (added by MakeMaker)

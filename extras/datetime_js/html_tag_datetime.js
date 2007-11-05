@@ -275,15 +275,15 @@ function setToday(hiddenElement) {
 
 function setHidden(hiddenElement,syncV,year,month,day,hour,min) {
 	var value;
-	if (month && (month.toString().length == 1)) month = '0' + month.toString();
-	if (day && (day.toString().length == 1)) day = '0' + day.toString();
-	if (hour && (hour.toString().length == 1)) hour = '0' + hour.toString();
-	if (min && (min.toString().length == 1)) min = '0' + min.toString();
-	if (year) {
+	if (month.toString() != '' && (month.toString().length == 1)) month = '0' + month.toString();
+	if (day.toString()  != '' && (day.toString().length == 1)) day = '0' + day.toString();
+	if (hour.toString() != '' && (hour.toString().length == 1)) hour = '0' + hour.toString();
+	if (min.toString()  != '' && (min.toString().length == 1)) min = '0' + min.toString();
+	if (year != '') {
 		value = year + '-' + month + '-' + day;
-		if (hour) value += ' ';
+		if (hour.toString() != '') value += ' ';
 	}
-	if (hour) {
+	if (hour.toString() != '') {
 		value += hour +':'+min + ':00';
 	}
 	$(hiddenElement).value = value;
@@ -320,6 +320,10 @@ function setHidden(hiddenElement,syncV,year,month,day,hour,min) {
     var anno_obj 		= $("0_" + $(txtHiddenElementName).id);
 		var ohour				= $('3_' + $(txtHiddenElementName).id);
 		var omin				= $('4_' + $(txtHiddenElementName).id);
+		if (mese && mese.toString() != '' && (mese.toString().length == 1)) mese = '0' + mese.toString();
+		if (giorno && giorno.toString() != '' && (giorno.toString().length == 1)) giorno = '0' + giorno.toString();
+		if (hour && hour.toString() != '' && (hour.toString().length == 1)) hour = '0' + hour.toString();
+		if (min  && min.toString() != '' && (min.toString().length == 1)) min = '0' + min.toString();
     if (giorno_obj) giorno_obj.value=giorno;
     if (mese_obj) mese_obj.value=mese;     
     if (anno_obj) anno_obj.value=anno;
